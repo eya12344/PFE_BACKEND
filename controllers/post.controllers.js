@@ -26,7 +26,7 @@ exports.createPost = async (req, res) => {
 };
 
 // Fonction pour récupérer tous les posts
-exports.getPost = async (req, res) => {
+exports.getAllPost = async (req, res) => {
   try {
     const posts = await Post.find().populate("creator");
     res.status(200).json(posts);

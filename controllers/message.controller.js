@@ -19,7 +19,7 @@ exports.createMessage = async (req, res) => {
 };
 
 // Récupérer tous les messages d'un chat
-exports.getMessages = async (req, res) => {
+exports.getAllMessages = async (req, res) => {
   try {
     const { chatId } = req.params;
 

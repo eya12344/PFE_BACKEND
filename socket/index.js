@@ -13,7 +13,7 @@ let onlineUsers = [];
 io.on("connection", (socket) => {
   console.log(" Nouvelle connexion :", socket.id);
 
-  // ➕ Ajouter un nouvel utilisateur connecté
+  //Ajouter un nouvel utilisateur connecté
   socket.on("addNewUser", (userId) => {
     if (!onlineUsers.some((user) => user.userId === userId)) {
       onlineUsers.push({
