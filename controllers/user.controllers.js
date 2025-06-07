@@ -4,7 +4,7 @@ const User = require("../models/User"); // Assurez-vous d'avoir un modèle User
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find().select("-password"); // Exclure le mot de passe
-    res.status(200).json({ success: true, data: users });
+    res.status(200).json({ users });
   } catch (err) {
     res.status(500).json({ success: false, message: "Erreur serveur" });
   }
@@ -99,6 +99,7 @@ exports.followUser = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ success: false, message: "Erreur serveur" });
+    console.log(err);
   }
 };
 
@@ -144,6 +145,7 @@ exports.unfollowUser = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ success: false, message: "Erreur serveur" });
+    
   }
 };
 

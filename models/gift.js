@@ -5,7 +5,7 @@ const GiftSchema = new mongoose.Schema(
     theme: String,
     category: {
       type: String,
-      enum: ["Birthday", "Marriage", "Baby Shower", "Event", "Other"],
+      enum: ["Birthday", "Marriage", "Baby Shower", "Event","Noel", "Other"],
       required: [true, "Type is required"],
     },
     gifts: [

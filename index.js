@@ -4,14 +4,17 @@ const express = require("express");
 const connect = require("./config/ConnectDB");
 const app = express();
 const mongoose = require("mongoose");
-
+const cors = require("cors");
 connect();
 
-const PORT = process.env.PORT || 5000;
-
+const PORT = process.env.PORT || 4000;
+app.use(cors());
 // Middleware
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
+app.get("/api/hello", (req, res) => {
+  res.json({ message: "Bonjour depuis le backend Node.js !" });
+});
 
 // Routes (Vérifiez que chaque require() renvoie bien un routeur)
 app.use("/api/auth", require("./routes/Auth.route"));
@@ -23,5 +26,5 @@ app.use("/api/message", require("./routes/message.route"));
 app.use("/api/notification", require("./routes/notification.route"));
 
 app.listen(PORT, () => {
-  console.log("Server is running on port", PORT);
+  console.log("Serveur backend sur http://localhost:${PORT}", PORT);
 });

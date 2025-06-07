@@ -20,6 +20,7 @@ exports.createlist = async (req, res) => {
     res.status(201).json(newGiftList);
   } catch (error) {
     res.status(500).json({ error: "Erreur lors de la création de la liste" });
+    console.log(error);
   }
 };
 

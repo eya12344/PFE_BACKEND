@@ -16,9 +16,6 @@ var transporter = Nodemailer.createTransport({
     rejectUnauthorized: false,
   },
 });
-
-//const sendEmail = require("../utils/sendEmail");
-
 // Signin user
 exports.signin = async (req, res, next) => {
   const { email, password } = req.body;
@@ -39,7 +36,7 @@ exports.signin = async (req, res, next) => {
     if (!user) {
       return res
         .status(401)
-        .json({ success: false, message: "Invalid credentials" });
+        .json({ success: false, message: "Invalid credentials " });
     }
 
     // Check if password matches
@@ -57,9 +54,22 @@ exports.signin = async (req, res, next) => {
   }
 };
 
+// Fonction pour générer un token et l'envoyer dans la réponse
+const sendToken = (user, statusCode, res) => {
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "7d", // ou ce que tu veux
+  });
+
+  res.status(statusCode).json({
+    success: true,
+    token,
+    user, // tu peux adapter ce que tu veux renvoyer ici
+  });
+};
+
 // Register user
 exports.signup = async (req, res, next) => {
-  const { fullName, email, password, dateOfBirth, gender, country } = req.body;
+  const { fullName, email, password, dateDeNaiss, sexe, country } = req.body;
   console.log("Data received in signup controller:", req.body);
 
   try {
@@ -67,8 +77,9 @@ exports.signup = async (req, res, next) => {
       fullName,
       email,
       password,
-      dateOfBirth: new Date(dateOfBirth),
-      gender,
+      dateDeNaiss,
+
+      sexe,
       country,
     });
     console.log("User created:", user);
